@@ -1,0 +1,46 @@
+# --- Model settings ---
+
+# some basic config
+num_cpu_core: 2
+
+data_mode: 0 # valid data mode {0: standard, 1: big data mode}
+model_dir: /tmp/dnn # where to save trained model. leave None to save the model in /tmp/
+log_dir: /tmp/dnn # where to save logs during training. leave None to save the log in /tmp/
+append_cols: ['user_group_id', 'channel', 'target'] # cols that append to the predicted result
+
+model_type: 1 # valid model types: {0:linear, 1:dnn, 2:wide_&_deep, 3: logistic regressor}
+problem_type: 1 # valid problem types: {0: classification, 1:regression}
+
+# common hyper-params
+n_classes: 3 # only valid for classification problems
+max_iter: 10000
+save_checkpoint_interval: 5000 # save checkpoints every this many steps
+batch_size: 1000
+
+# --- preprocessing setting ---
+norm_type: 0 # valid norm_type {0: z-score,  1: min-max, 2: max}. leave None not to do normarlization
+norm_columns: [f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, f20, f21, f22, f23, f24, f25, f26, f27, f28, f29, f30, f31, f32, f33, f34, f35, target]# columns need to be normed
+groupby_key:
+
+# --- lr setting ---
+base_lr: 0.01 # base learning rate
+# lr_policy: 'step' # valid lr policy:{'fixed', 'step'} # does not work currently
+# step_size: 100 # how long to apply lr policy # does not work currently
+
+# --- regulization setting ---
+alpha: 0.0  # L1 constraint coefficient. default:0
+beta: 0.05  # L2 constraint coefficient. default:0
+early_stopping_interval: 2000 # only valid when use_early_stopping is True
+evaluate_interval: 5000 # only valid when do_evaluation is True
+
+# --- wide features ---
+wide_features: [2] # {0: _hot, 1: multi_category, 2:continuous, 3:crossed, 4:bucketized}
+
+# --- deep model setting ---
+hidden_units: [100, 200, 100] # number of hidden units in deep model(array-like)
+embedding_dimension: 16 # dimension for categorical feature embedding
+dropout_ratio: 0.5
+deed_features: [2, 5] # {0: multi_hot, 1: multi_category, 2:continuous, 3:crossed, 4:bucketized, 5:embeding}
+
+# --- performance setting ---
+metrics: ['mse', 'mae', 'mape'] # [auc, ]
