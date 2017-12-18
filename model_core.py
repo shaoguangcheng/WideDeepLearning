@@ -281,7 +281,7 @@ class ModelCore(object):
         if self._data_conf.bucketized_columns is not None:
             [bucketized_feature_columns.append(
                 bucketized_column(continuous_feature_columns[column], boundaries=boundary))
-             for column, boundary in self._data_conf.bucketized_columns.items]
+             for column, boundary in self._data_conf.bucketized_columns.items()]
 
         if len(multi_category_feature_columns) > 0:
             embedding_feature_columns = [embedding_column(_, dimension=self._model_conf.embedding_dimension)
